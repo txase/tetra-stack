@@ -20,6 +20,5 @@
   },
   "homepage": "https://github.com/bettse/tetra-stack#readme",
   "dependencies": {
-    "node-ld": "^1.1.3"
   }
 }
