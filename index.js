@@ -10,12 +10,11 @@ require.extensions['.html'] = function htmlRequire(module, filename) {
 };
 var index = require("./index.html");
 
-module.exports = function handler(message, output) {
+module.exports = function handler(message, output, done) {
 	// The following are examples of things you can do in a function.
 
 	// Log to the console.
-	console.log(`Message: ${JSON.stringify(message, null, 2)}`)
-
+	console.log(`Message: ${Date.now()} ${message.method}`)
 
 	/*
 	* Detect verb, have one file for returning HTML on GET, and another for calculating pwd on POST
@@ -25,32 +24,22 @@ module.exports = function handler(message, output) {
 	*/
 	var pwd = '00000000';
 
-
-	// Send a message to other nodes connected to the first output.
-	let outputMessage = "Hello, nodes!"
-	let outputPromise = output(0, outputMessage)
-
 	if (message.method == 'GET') {
-		let response = {
+		done({
 			statusCode: 200,
 			headers: {
 				"Content-Type": "text/html"
 			},
 			body: index
-		}
+		})
 	} else if (message.method == 'POST') {
-		let response = {
+		done({
 			statusCode: 200,
 			headers: {
 				"Content-Type": "application/json"
 			},
 			body: {pwd: pwd}
-		}
-
+		})
 	}
 
-	// Return a Promise that resolves when processing is complete.
-	// We wait for the output message to be sent, then we respond
-	// with an HTTP response.
-	return outputPromise.then(() => response)
 }
