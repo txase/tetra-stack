@@ -29,8 +29,8 @@ module.exports = function handler(message, output, done) {
       let body = JSON.parse(message.body);
       uid = body.uid;
     } else if (message.params.header['Content-Type'].indexOf("application/x-www-form-urlencoded") != -1) {
-      console.log(message.body, "->", qs.parse(message.body));
-      let body = qs.parse(message.body);
+      let body = qs.parse(message.body.toString());
+      console.log(message.body, "->", body);
       uid = body.uid;
     } else {
       done({
