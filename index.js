@@ -12,8 +12,8 @@ require.extensions['.html'] = function htmlRequire(module, filename) {
 var index = require("./index.html");
 
 module.exports = function handler(message, output, done) {
+  console.log(`Message: ${(new Date()).toTimeString()} ${message.method} ${message.resource}`)
   if (message.method == 'GET') {
-    console.log(`Message: ${(new Date()).toTimeString()} ${message.method}`)
     done({
       statusCode: 200,
       headers: {
@@ -22,7 +22,6 @@ module.exports = function handler(message, output, done) {
       body: index
     })
   } else if (message.method == 'POST') {
-    console.log(`Message: ${(new Date()).toTimeString()} ${message.method} ${JSON.stringify(message.params)} ${message.body}`)
     var pwd = '00000000';
     var uid = '04000000000000';
     if (message.params.header['Content-Type'] == "application/json") {
@@ -30,7 +29,6 @@ module.exports = function handler(message, output, done) {
       uid = body.uid;
     } else if (message.params.header['Content-Type'].indexOf("application/x-www-form-urlencoded") != -1) {
       let body = qs.parse(message.body.toString());
-      console.log(message.body, "->", body);
       uid = body.uid;
     } else {
       done({
