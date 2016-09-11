@@ -1,6 +1,6 @@
 var rotr32 = (a,b)=>((a>>>b)|(a<<(32-b))) >>> 0
 var debug = false
-exports = function pwdgen(uid) {
+module.exports = function pwdgen(uid) {
   uid = new Buffer(uid,'hex')
   var base = new Buffer("UUUUUUU(c) Copyright LEGO 2014AA");
   uid.copy(base)
