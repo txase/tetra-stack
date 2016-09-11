@@ -3,11 +3,12 @@
 
 var fs = require('fs');
 var pwdgen = require('./PWDGen');
-var index = require("./index.html");
 
+//http://stackoverflow.com/a/12753026/1112230
 require.extensions['.html'] = function htmlRequire(module, filename) {
 	module.exports = fs.readFileSync(filename, 'utf8');
 };
+var index = require("./index.html");
 
 module.exports = function handler(message, output) {
 	// The following are examples of things you can do in a function.
@@ -29,7 +30,7 @@ module.exports = function handler(message, output) {
 	let outputMessage = "Hello, nodes!"
 	let outputPromise = output(0, outputMessage)
 
-	if (method == 'GET') {
+	if (message.method == 'GET') {
 		let response = {
 			statusCode: 200,
 			headers: {
@@ -37,7 +38,7 @@ module.exports = function handler(message, output) {
 			},
 			body: index
 		}
-	} elseif (method == 'POST') {
+	} else if (message.method == 'POST') {
 		let response = {
 			statusCode: 200,
 			headers: {
