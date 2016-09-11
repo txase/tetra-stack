@@ -23,11 +23,18 @@ module.exports = function handler(message, output, done) {
   } else if (message.method == 'POST') {
     console.log(`Message: ${(new Date()).toTimeString()} ${message.method} ${JSON.stringify(message.params)} ${message.body}`)
     var pwd = '00000000';
-    if (message.params.headers['Content-Type'] == "application/json") {
+    if (message.params.header['Content-Type'] == "application/json") {
       let body = JSON.parse(message.body);
       pwd = body.uid;
-    } else if (message.params.headers['Content-Type'].index("application/x-www-form-urlencoded") != -1) {
-
+    } else if (message.params.header['Content-Type'].index("application/x-www-form-urlencoded") != -1) {
+    } else {
+      done({
+        statusCode: 400,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({error: "Unknown Content-Type"})
+      })
     }
     /*
     var pwd = pad(8, PWDGen(uid).toString(16), '0');
@@ -42,3 +49,4 @@ module.exports = function handler(message, output, done) {
     })
   }
 }
+
