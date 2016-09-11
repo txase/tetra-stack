@@ -11,20 +11,8 @@ require.extensions['.html'] = function htmlRequire(module, filename) {
 var index = require("./index.html");
 
 module.exports = function handler(message, output, done) {
-	// The following are examples of things you can do in a function.
-
-	// Log to the console.
-	console.log(`Message: ${Date.now()} ${message.method}`)
-
-	/*
-	* Detect verb, have one file for returning HTML on GET, and another for calculating pwd on POST
-	*
-	var pwd = pad(8, PWDGen(uid).toString(16), '0');
-	console.log(uid,'=>',pwdgen(uid))
-	*/
-	var pwd = '00000000';
-
 	if (message.method == 'GET') {
+	  console.log(`Message: ${Date.now()} ${message.method}`)
 		done({
 			statusCode: 200,
 			headers: {
@@ -33,13 +21,19 @@ module.exports = function handler(message, output, done) {
 			body: index
 		})
 	} else if (message.method == 'POST') {
+    /*
+    var pwd = pad(8, PWDGen(uid).toString(16), '0');
+    console.log(uid,'=>',pwdgen(uid))
+    */
+
+	  var pwd = '00000000';
+	  console.log(`Message: ${Date.now()} ${message.method} ${body}`)
 		done({
 			statusCode: 200,
 			headers: {
 				"Content-Type": "application/json"
 			},
-			body: {pwd: pwd}
+			body: JSON.stringify({pwd: pwd})
 		})
 	}
-
 }
