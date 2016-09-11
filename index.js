@@ -3,7 +3,7 @@
 
 var fs = require('fs');
 var qs = require('querystring');
-var pwdgen = require('./PWDGen');
+var pwdgen = require('./PWDGen').pwdgen;
 
 //http://stackoverflow.com/a/12753026/1112230
 require.extensions['.html'] = function htmlRequire(module, filename) {
