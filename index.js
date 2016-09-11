@@ -2,6 +2,7 @@
 "use strict"
 
 var fs = require('fs');
+var qs = require('querystring');
 var pwdgen = require('./PWDGen');
 
 //http://stackoverflow.com/a/12753026/1112230
@@ -25,8 +26,10 @@ module.exports = function handler(message, output, done) {
     var pwd = '00000000';
     if (message.params.header['Content-Type'] == "application/json") {
       let body = JSON.parse(message.body);
-      pwd = body.uid;
-    } else if (message.params.header['Content-Type'].index("application/x-www-form-urlencoded") != -1) {
+      console.dir(body);
+    } else if (message.params.header['Content-Type'].indexOf("application/x-www-form-urlencoded") != -1) {
+      let body = qs.parse(message.body);
+      console.dir(body);
     } else {
       done({
         statusCode: 400,
