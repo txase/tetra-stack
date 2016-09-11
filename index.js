@@ -39,3 +39,4 @@ console.log(uid,'=>',pwdgen(uid))
   return outputPromise.then(() => response)
 }
 
+module.exports = handler
