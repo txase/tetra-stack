@@ -12,7 +12,7 @@ var index = require("./index.html");
 
 module.exports = function handler(message, output, done) {
 	if (message.method == 'GET') {
-	  console.log(`Message: ${Date.now().toISOString()} ${message.method}`)
+	  console.log(`Message: ${(new Date()).toTimeString()} ${message.method}`)
 		done({
 			statusCode: 200,
 			headers: {
@@ -27,7 +27,7 @@ module.exports = function handler(message, output, done) {
     */
 
 	  var pwd = '00000000';
-	  console.log(`Message: ${Date.now().toISOString()} ${message.method} ${message.body}`)
+	  console.log(`Message: ${(new Date()).toTimeString()} ${message.method} ${message.body}`)
 		done({
 			statusCode: 200,
 			headers: {
