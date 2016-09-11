@@ -20,5 +20,8 @@
   },
   "homepage": "https://github.com/bettse/tetra-stack#readme",
   "dependencies": {
+  },
+  "devDependencies": {
+    "express": "^4.14.0"
   }
 }
