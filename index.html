@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tetragrammaton</title>
+</head>
+<body>
+<form action="/" method="post">
+    <div>
+        <label for="uid">UID:</label>
+        <input name="uid" type="text" size="14"/>
+    </div>
+    <div class="button">
+        <button type="submit">Send UID</button>
+    </div>
+</form>
+<p> Or using CURL:
+<pre>
+curl --data 'uid=XXXXXXXXXXXXXX' http://ldpwd.ericbetts.org
+</pre>
+</p>
+</body>
+</html>
