@@ -21,7 +21,7 @@ module.exports = function handler(message, output, done) {
       body: index
     })
   } else if (message.method == 'POST') {
-    console.log(`Message: ${(new Date()).toTimeString()} ${message.method} ${message.params} ${message.body}`)
+    console.log(`Message: ${(new Date()).toTimeString()} ${message.method} ${JSON.stringify(message.params)} ${message.body}`)
     var pwd = '00000000';
     if (message.params.headers['Content-Type'] == "application/json") {
       let body = JSON.parse(message.body);
