@@ -24,10 +24,10 @@ module.exports = function handler(message, output, done) {
   } else if (message.method == 'POST') {
     var pwd = '00000000';
     var uid = '04000000000000';
-    if (message.params.header['Content-Type'] == "application/json") {
+    if (message.headers['Content-Type'] == "application/json") {
       let body = JSON.parse(message.body);
       uid = body.uid;
-    } else if (message.params.header['Content-Type'].indexOf("application/x-www-form-urlencoded") != -1) {
+    } else if (message.headers['Content-Type'].indexOf("application/x-www-form-urlencoded") != -1) {
       let body = qs.parse(message.body.toString());
       uid = body.uid;
     } else {
