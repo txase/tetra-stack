@@ -14,7 +14,7 @@ var index = require("./index.html");
 module.exports = function handler(message, output, done) {
   console.log(`Message: ${(new Date()).toTimeString()} ${message.method} ${message.resource}`)
   if (message.method == 'GET') {
-    done({
+    done(null, {
       statusCode: 200,
       headers: {
         "Content-Type": "text/html"
@@ -31,7 +31,7 @@ module.exports = function handler(message, output, done) {
       let body = qs.parse(message.body.toString());
       uid = body.uid;
     } else {
-      done({
+      done(null, {
         statusCode: 400,
         headers: {
           "Content-Type": "application/json"
@@ -42,7 +42,7 @@ module.exports = function handler(message, output, done) {
     //pwd = pad(8, PWDGen(uid).toString(16), '0');
     pwd = pwdgen(uid);
     console.log(uid, '=>', pwd);
-    done({
+    done(null, {
       statusCode: 200,
       headers: {
         "Content-Type": "application/json"
